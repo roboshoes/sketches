@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            html, body {
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+            }
+
+            #canvas {
+                width: 100%;
+                height: 100%;
+            }
+        </style>
+    </head>
+    <body>
+
+        <script id="vertex" type="x-shader/x-vertex">
+            precision mediump float;
+
+            attribute vec2 aPosition;
+
+            varying vec2 vUV;
+
+            void main() {
+                gl_Position = vec4( aPosition, 0, 1 );
+                vUV = ( aPosition + vec2( 1 ) ) / 2.0;
+            }
+
+        </script>
+
+        <script id="fragment" type="x-shader/x-fragment">
+            #extension GL_EXT_shader_texture_lod : enable
+            #extension GL_OES_standard_derivatives : enable
+
+            precision mediump float;
+
+            varying vec2 vUV;
+
+            uniform vec2 uResolution;
+            uniform vec2 uMouse;
+            uniform sampler2D uTexture;
+
+            const vec4 BLACK = vec4( 0, 0, 0, 1 );
+            const vec4 WHITE = vec4( 1 );
+            const float OFFSET = 100.0;
+
+            vec4 colorAt( vec2 coords ) {
+                return mix( WHITE, BLACK, step( 10.0, mod( coords.y , 20.0 ) ) );
+            }
+
+            float lense( float t ) {
+                return - t * ( t - 2.0 );
+            }
+
+            void main() {
+
+                float distanceToMouse = distance( gl_FragCoord.xy, uMouse );
+                float isInside = step( distanceToMouse, 200.0 );
+
+                float percentFromMouse = lense( min( distanceToMouse, 200.0 ) / 200.0 );
+
+                vec2 pixel = gl_FragCoord.xy;
+                vec2 direction = uMouse - pixel;
+
+                pixel += ( normalize( direction ) * OFFSET * percentFromMouse ) * isInside;
+
+                vec4 color =
+                    colorAt( pixel ) / 3.0 +
+                    colorAt( pixel + vec2( 0, -1.0 * isInside ) ) / 3.0 +
+                    colorAt( pixel + vec2( 0, 1.0 * isInside ) ) / 3.0;
+
+                gl_FragColor = vec4( max( color.xyz, fwidth( color.xyz ) ), 1.0 );
+            }
+
+        </script>
+
+        <canvas id="canvas"></canvas>
+
+        <script src="script.js"></script>
+    </body>
+</html>

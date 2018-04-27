@@ -1,0 +1,35 @@
+{
+  "name": "transmission",
+  "version": "0.1.0",
+  "description": "",
+  "keywords": [],
+  "contributors": [
+    {
+      "name": "Mathias Paumgarten",
+      "email": "mail@mathias-paumgarten.com",
+      "url": "http://mathias-paumgarten.com"
+    }
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "ccapture.js": "^1.1.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.2",
+    "babel-preset-env": "^1.6.0",
+    "babelify": "^8.0.0",
+    "browserify": "^14.4.0",
+    "canvas-recorder": "^1.0.4",
+    "eslint": "^4.19.1",
+    "gulp": "^3.9.1",
+    "gulp-clean-css": "^3.9.3",
+    "gulp-connect": "^5.5.0",
+    "gulp-pug": "^3.3.0",
+    "gulp-sass": "^3.2.1",
+    "mout": "^1.1.0",
+    "noisejs": "^2.1.0",
+    "run-sequence": "^2.2.1",
+    "three": "^0.89.0",
+    "vinyl-source-stream": "^1.1.2"
+  }
+}

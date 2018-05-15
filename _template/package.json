@@ -1,0 +1,10 @@
+{
+    "name": "template",
+    "version": "1.0.0",
+    "private": true,
+    "author": {
+        "name": "Mathias Paumgarten",
+        "email": "mail@mathias-paumgarten.com"
+    },
+    "dependencies": {}
+}

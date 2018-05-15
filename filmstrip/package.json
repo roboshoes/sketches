@@ -1,0 +1,24 @@
+{
+    "name": "filmstrip",
+    "version": "1.0.0",
+    "private": true,
+    "author": {
+        "name": "Mathias Paumgarten",
+        "email": "mail@mathias-paumgarten.com"
+    },
+    "scripts": {
+        "dev": "parcel index.html"
+    },
+    "devDependencies": {
+        "@types/lodash": "^4.14.108",
+        "@types/three": "^0.91.13",
+        "canvas-recorder": "^1.0.4",
+        "eases": "^1.0.8",
+        "less": "^3.0.4",
+        "lodash": "^4.17.10",
+        "parcel-bundler": "^1.8.1",
+        "three": "^0.92.0",
+        "tslint": "^5.10.0",
+        "typescript": "^2.8.3"
+    }
+}

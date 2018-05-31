@@ -1,9 +1,12 @@
 import { random, times } from "lodash";
 import { AdditiveBlending, BufferAttribute, BufferGeometry, Points, ShaderMaterial, WebGLRenderer } from "three";
-
-import fragmentShader from "../shaders/fragment.glsl";
-import vertexShader from "../shaders/vertex.glsl";
 import { createTexture, ShaderPass, Uniforms } from "./shaderpass";
+
+// @ts-ignore
+import fragmentShader from "../shaders/fragment.glsl";
+// @ts-ignore
+import vertexShader from "../shaders/vertex.glsl";
+
 
 
 export interface ParticlesOptions {

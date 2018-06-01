@@ -14,11 +14,7 @@ import {
     WebGLRenderTarget,
 } from "three";
 
-const vertexShader = `
-    void main() {
-        gl_Position = vec4( position, 1 );
-    }
-`;
+const vertexShader = "void main() { gl_Position = vec4( position, 1 ); }";
 
 const geometry = new PlaneBufferGeometry( 2, 2 );
 const camera = new PerspectiveCamera( 90, 1, 1, 10000 );

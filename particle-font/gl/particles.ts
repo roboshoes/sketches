@@ -8,7 +8,6 @@ import fragmentShader from "../shaders/fragment.glsl";
 import vertexShader from "../shaders/vertex.glsl";
 
 
-
 export interface ParticlesOptions {
     positionShader: string,
     positionUniforms: { [ key: string ]: any},
@@ -51,7 +50,7 @@ export class Particles extends Points {
                 for ( let i = 0, length = size * size; i < length; i++ ) {
                     array.push(
                         random( -100, 100 ),
-                        random( -100, 400 ),
+                        random( -100, 100 ),
                         random( -100, 100 ),
                         0
                     );
@@ -62,7 +61,7 @@ export class Particles extends Points {
             uniforms: {
                 ...options.positionUniforms,
                 delta: 0.016,
-                velocityTexture: createTexture( size, size, 5 ),
+                velocityTexture: createTexture( size, size, 0 ),
             }
         } );
 
@@ -71,7 +70,7 @@ export class Particles extends Points {
             shader: options.velocityShader,
             name: "velocityTexture",
             side: size,
-            startValue: times( size * size * 4, () => random( -5, 5 ) ),
+            startValue: 0,
             uniforms:  {
                 ...options.velocityUniforms,
                 positionTexture: positionPass.getTexture(),
@@ -126,5 +125,7 @@ export class Particles extends Points {
 
         ( this.material as ShaderMaterial ).uniforms.positionTexture.value =
             this.positionPass.getTexture();
+
+        this.latest = now;
     }
 }

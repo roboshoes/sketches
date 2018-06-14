@@ -1,0 +1,21 @@
+{
+  "name": "swoosh",
+  "version": "1.0.0",
+  "description": "Swoosh Animation",
+  "scripts": {
+    "dev": "parcel index.html"
+  },
+  "author": {
+    "name": "Mathias Paumgarten",
+    "email": "mail@mathias-paumgarten.com"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@types/three": "^0.92.5",
+    "canvas-recorder": "^1.4.1",
+    "less": "^3.0.4",
+    "parcel-bundler": "^1.8.1",
+    "three": "^0.93.0",
+    "typescript": "^2.9.2"
+  }
+}

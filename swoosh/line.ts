@@ -12,11 +12,15 @@ export class Line {
     }
 
     render( context: CanvasRenderingContext2D, time: number ) {
+        if ( ! this.alive ) return;
+
         const percent = time - this.creation / this.ttl;
 
         const end = this.position.clone().add( this.direction.clone().multiplyScalar( percent ) );
 
+        context.beginPath();
         context.moveTo( this.position.x, this.position.y );
         context.lineTo( end.x, end.y );
+        context.stroke();
     }
 }

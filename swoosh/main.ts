@@ -1,4 +1,4 @@
-import { bootstrap, options, draw } from "canvas-recorder";
+import { bootstrap, options, draw, stop } from "canvas-recorder";
 import { Line } from "./line";
 import { Vector2 } from "three";
 

@@ -11,10 +11,12 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@types/noisejs": "0.0.28",
     "@types/three": "^0.92.5",
     "canvas-recorder": "^1.4.1",
     "eases": "^1.0.8",
     "less": "^3.0.4",
+    "noisejs": "^2.1.0",
     "parcel-bundler": "^1.8.1",
     "three": "^0.93.0",
     "typescript": "^2.9.2"

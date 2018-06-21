@@ -1,4 +1,6 @@
-import { Vector2 } from "three";
+import { Vector2, Vector } from "three";
+import easeIn from "eases/quad-in";
+import easeOut from "eases/quad-out";
 
 export class Line {
 
@@ -12,15 +14,26 @@ export class Line {
     }
 
     render( context: CanvasRenderingContext2D, time: number ) {
-        if ( ! this.alive ) return;
+        const percent = ( time - this.creation ) / this.ttl;
 
-        const percent = time - this.creation / this.ttl;
+        if ( ! this.alive || percent > 1 ) {
+            this.alive = false;
+            return;
+        };
 
-        const end = this.position.clone().add( this.direction.clone().multiplyScalar( percent ) );
+        const end: Vector2 = this.position.clone();
+        const start: Vector2 = this.position.clone();
+        const color = Math.floor( 255 * percent );
+
+        end.add( this.direction.clone().multiplyScalar( easeOut( percent ) * 200 ) );
+        start.add( this.direction.clone().multiplyScalar( easeIn( percent ) * 100 ) );
 
         context.beginPath();
-        context.moveTo( this.position.x, this.position.y );
+        context.moveTo( start.x, start.y );
         context.lineTo( end.x, end.y );
+        context.strokeStyle = `rgba( 255, 172, 178, ${ 1 - percent })`;
+        context.lineWidth = 10 * ( 1 - percent )
+        context.lineCap = "round";
         context.stroke();
     }
 }

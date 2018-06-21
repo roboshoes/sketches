@@ -13,6 +13,7 @@
   "devDependencies": {
     "@types/three": "^0.92.5",
     "canvas-recorder": "^1.4.1",
+    "eases": "^1.0.8",
     "less": "^3.0.4",
     "parcel-bundler": "^1.8.1",
     "three": "^0.93.0",

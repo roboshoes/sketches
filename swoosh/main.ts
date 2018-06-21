@@ -5,7 +5,7 @@ import { Vector2 } from "three";
 const TAU = Math.PI * 2;
 const SIZE = 300;
 const RADIUS = Math.sqrt( 2 ) * SIZE;
-const CREATION_TIME = 1;
+const CREATION_TIME = 10;
 const lines: Line[] = [];
 
 let timeAtLastSpawn = 0;
@@ -27,7 +27,7 @@ options( {
     record: false,
     size: [ 1024, 1024 ],
     clear: true,
-    color: "white",
+    color: "#590457",
 } );
 
 draw( ( context: CanvasRenderingContext2D, time: number ) => {
@@ -43,7 +43,7 @@ draw( ( context: CanvasRenderingContext2D, time: number ) => {
     removeDeadLines();
 
     if ( time - timeAtLastSpawn > CREATION_TIME ) {
-        lines.unshift( new Line( new Vector2( x, y ), time ) );
+        lines.push( new Line( new Vector2( x, y ), time ) );
         timeAtLastSpawn = time;
     }
 
@@ -52,7 +52,7 @@ draw( ( context: CanvasRenderingContext2D, time: number ) => {
     context.beginPath();
 
     context.fillStyle = "black";
-    // context.fillRect( x, y, 10, 10 );
+    context.fillRect( x - 5 , y - 5, 10, 10 );
 
     context.translate( -512, -512 );
 

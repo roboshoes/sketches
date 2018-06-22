@@ -29,10 +29,8 @@ renderer.setSize( 1024, 1024 );
 
 camera.aspect = 1;
 camera.updateProjectionMatrix();
-camera.position.set( 0, 0, 0 );
+camera.position.set( 0, 0, -100 );
 camera.lookAt( new Vector3() );
-
-const cube = new Mesh( new CubeGeometry( 20, 20 , 20 ), new MeshBasicMaterial( { color: 0xFF0000 } ) );
 
 scene.add( particles );
 scene.add( ambientLight );

@@ -4,6 +4,7 @@ import { Vector2 } from "three";
 
 const TAU = Math.PI * 2;
 const SIZE = 300;
+const MS = 5000;
 const RADIUS = Math.sqrt( 2 ) * SIZE;
 const CREATION_TIME = 10;
 const lines: Line[] = [];
@@ -24,35 +25,40 @@ function removeDeadLines() {
 }
 
 options( {
-    record: false,
+    record: true,
     size: [ 1024, 1024 ],
     clear: true,
     color: "#590457",
+    fps: 30,
 } );
 
 draw( ( context: CanvasRenderingContext2D, time: number ) => {
 
     context.translate( 512, 512 );
 
-    const t = ( time % 6000 ) / 6000;
-    const multi = t * TAU;
+    const t = ( time % MS ) / MS;
+    const multi = t * TAU + ( TAU * .75 );
 
     const x: number = safeClamp( Math.cos( multi ) * RADIUS, SIZE );
     const y: number = safeClamp( Math.sin( multi ) * RADIUS, SIZE );
 
     removeDeadLines();
 
-    if ( time - timeAtLastSpawn > CREATION_TIME ) {
+    if ( time > MS && lines.length === 0 ) {
+        stop();
+    }
+
+    if ( time - timeAtLastSpawn > CREATION_TIME && time < MS ) {
         lines.push( new Line( new Vector2( x, y ), time ) );
         timeAtLastSpawn = time;
     }
 
     lines.forEach( line => line.render( context, time ) );
 
-    context.beginPath();
+    // context.beginPath();
 
-    context.fillStyle = "black";
-    context.fillRect( x - 5 , y - 5, 10, 10 );
+    // context.fillStyle = "black";
+    // context.fillRect( x - 5 , y - 5, 10, 10 );
 
     context.translate( -512, -512 );
 

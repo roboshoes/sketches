@@ -8,7 +8,7 @@ export class Line {
 
     alive = true;
 
-    private ttl: number = 1000 + Math.random() * 4000;
+    private ttl: number = 1000 + Math.random() * 3000;
     private direction = new Vector2( -1 +  Math.random() * 2, -1 +  Math.random() * 2 ).normalize();
     private trajectory: Vector2[] = [];
 

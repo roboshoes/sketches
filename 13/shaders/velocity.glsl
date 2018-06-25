@@ -8,9 +8,6 @@ uniform float delta;
 
 const float PI = 3.141592653589793;
 const float TAU = PI * 2.0;
-const float SPEED_LIMIT = 9.0;
-const vec3 CENTER = vec3( 0, 0, 0 );
-
 #pragma glslify: curl = require(glsl-curl-noise)
 
 void main() {

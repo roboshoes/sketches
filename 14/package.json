@@ -1,0 +1,26 @@
+{
+  "name": "blob-grid",
+  "version": "1.0.0",
+  "description": "Exploration of grid filled with blobs",
+  "main": "index.js",
+  "author": {
+    "name": "Mathias Paumgarten",
+    "email": "mail@mathias-paumgarten.com"
+  },
+  "scripts": {
+    "dev": "parcel index.html"
+  },
+  "license": "MIT",
+  "private": true,
+  "dependencies": {},
+  "devDependencies": {
+    "@types/lodash": "^4.14.108",
+    "canvas-recorder": "^1.0.4",
+    "eases": "^1.0.8",
+    "fast-simplex-noise": "^3.2.0",
+    "less": "^3.0.4",
+    "lodash": "^4.17.10",
+    "parcel-bundler": "^1.8.1",
+    "typescript": "^2.8.3"
+  }
+}

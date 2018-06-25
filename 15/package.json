@@ -1,0 +1,22 @@
+{
+  "name": "hypno-circles",
+  "version": "1.0.0",
+  "description": "Some loops",
+  "scripts": {
+    "dev": "parcel index.html"
+  },
+  "author": "Mathias Paumgarten",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/lodash": "^4.14.110",
+    "@types/three": "^0.92.8",
+    "canvas-recorder": "^1.5.0",
+    "glslify-bundle": "^5.0.0",
+    "glslify-deps": "^1.3.1",
+    "image-shader": "^0.2.4",
+    "lodash": "^4.17.10",
+    "parcel-bundler": "^1.9.2",
+    "three": "^0.93.0",
+    "typescript": "^2.9.2"
+  }
+}

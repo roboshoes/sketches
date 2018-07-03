@@ -2,6 +2,10 @@
     "name": "template",
     "version": "1.0.0",
     "private": true,
+    "license": "MIT",
+    "scripts": {
+        "dev": "parcel index.html"
+    },
     "author": {
         "name": "Mathias Paumgarten",
         "email": "mail@mathias-paumgarten.com"

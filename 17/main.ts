@@ -1,7 +1,7 @@
-import { bootstrap, draw, options } from "canvas-recorder/gl";
+import { bootstrap, draw, options, setup } from "canvas-recorder/gl";
 import { AmbientLight, PerspectiveCamera, Scene, Vector3, WebGLRenderer } from "three";
 
-import { Particles } from "./particles";
+import { Particles } from "./gl/particles";
 // @ts-ignore
 import positionShader from "./shaders/position.fragment.glsl";
 // @ts-ignore
@@ -15,10 +15,14 @@ const particles = new Particles( 128, {
     renderer,
 
     positionShader,
-    positionUniforms: {},
+    positionUniforms: {
+        mouse: [ 0, 0 ],
+    },
 
     velocityShader,
-    velocityUniforms: {},
+    velocityUniforms: {
+        mouse: [ 0, 0 ],
+    },
 } );
 
 renderer.setSize( 1024, 1024 );
@@ -31,6 +35,14 @@ camera.lookAt( new Vector3() );
 scene.add( particles );
 scene.add( ambientLight );
 
+let x = 0;
+let y = 0;
+
+window.addEventListener( "mousemove" , ( event: MouseEvent ) => {
+    x = ( 1024 - Math.min( event.pageX, 1024 ) ) / 1024 * 200 - 100;
+    y = ( 1024 - Math.min( event.pageY, 1024 ) ) / 1024  * 200 - 100;
+} );
+
 options( {
     record: false,
     clear: false,
@@ -38,8 +50,11 @@ options( {
     color: "black",
 } );
 
+
 draw( ( gl: WebGLRenderingContext, now: number ) => {
+    particles.updateUniform( "mouse", [ x, y ] );
     particles.update( now );
+
     renderer.render( scene, camera );
 } );
 

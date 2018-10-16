@@ -13,5 +13,5 @@ void main() {
     float multiplier = 1.0 - min( max( dist / 100.0, 0.0 ),  1.0 );
 
     gl_Position = projectionMatrix * modelViewMatrix * vec4( particlePosition.xyz, 1.0 );
-    gl_PointSize = 4.0 + 8.0 * multiplier;
+    gl_PointSize = 4.0;
 }

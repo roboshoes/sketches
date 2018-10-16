@@ -1,12 +1,15 @@
 import { random } from "lodash";
 import { AdditiveBlending, BufferAttribute, BufferGeometry, Points, ShaderMaterial, WebGLRenderer } from "three";
 
+// @ts-ignore
+import fragmentShader from "../shaders/dirt.fragment.glsl";
+// @ts-ignore
+import vertexShader from "../shaders/dirt.vertex.glsl";
 import { createTexture, ShaderPass } from "./shader-pass";
-// @ts-ignore
-import fragmentShader from "./shaders/dirt.fragment.glsl";
-// @ts-ignore
-import vertexShader from "./shaders/dirt.vertex.glsl";
 
+
+// Incomplete list of possible uniform types.
+export type UniformValue = number | [ number, number ];
 
 export interface ParticlesOptions {
     positionShader: string;
@@ -22,7 +25,6 @@ export class Particles extends Points {
 
     private positionPass: ShaderPass;
     private velocityPass: ShaderPass;
-    private count: number;
     private latest: number;
 
     constructor( size: number, options: ParticlesOptions ) {
@@ -50,7 +52,7 @@ export class Particles extends Points {
                     array.push(
                         random( -100, 100 ),
                         random( -100, 100 ),
-                        random( -100, 100 ),
+                        1,
                         0,
                     );
                 }
@@ -98,7 +100,6 @@ export class Particles extends Points {
         super( geometry, material );
 
         this.frustumCulled = false;
-        this.count = size * size;
         this.latest = 0;
 
         this.positionPass = positionPass;
@@ -125,5 +126,10 @@ export class Particles extends Points {
             this.positionPass.getTexture();
 
         this.latest = now;
+    }
+
+    updateUniform( name: string, value: UniformValue ): void {
+        this.velocityPass.setPermanentUniforms( { [ name ]: value } );
+        this.positionPass.setPermanentUniforms( { [ name ]: value } );
     }
 }

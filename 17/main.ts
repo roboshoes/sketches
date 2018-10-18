@@ -1,4 +1,4 @@
-import { bootstrap, draw, options, setup } from "canvas-recorder/gl";
+import { bootstrap, draw, options, setup, stop } from "canvas-recorder/gl";
 import { AmbientLight, PerspectiveCamera, Scene, Vector3, WebGLRenderer } from "three";
 
 import { Particles } from "./gl/particles";
@@ -42,6 +42,10 @@ window.addEventListener( "mousemove" , ( event: MouseEvent ) => {
     x = ( 1024 - Math.min( event.pageX, 1024 ) ) / 1024 * 200 - 100;
     y = ( 1024 - Math.min( event.pageY, 1024 ) ) / 1024  * 200 - 100;
 } );
+
+
+stop();
+document.body.innerHTML = "";
 
 options( {
     record: false,

@@ -50,8 +50,8 @@ export class Particles extends Points {
 
                 for ( let j = 0, length = size * size; j < length; j++ ) {
                     array.push(
-                        random( -100, 100 ),
-                        random( -100, 100 ),
+                        random( -100, 100, true ),
+                        random( -100, 100, true ),
                         1,
                         0,
                     );

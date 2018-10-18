@@ -13,11 +13,8 @@ void main() {
 
     vec3 position = texture2D( positionTexture, uv ).xyz;
     vec3 velocity = texture2D( velocityTexture, uv ).xyz;
-    vec3 p = position + velocity * delta * 15.0;
 
-    float dist = distance( position.xy, mouse );
+    position += velocity * delta * 15.0;
 
-    p.x += lessThan( 10.0, dist ) * 30.0;
-
-    gl_FragColor = vec4( p, 1.0 );
+    gl_FragColor = vec4( max( vec3( -100 ), position ), 1.0 );
 }

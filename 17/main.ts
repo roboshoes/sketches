@@ -35,14 +35,13 @@ camera.lookAt( new Vector3() );
 scene.add( particles );
 scene.add( ambientLight );
 
-let x = 0;
-let y = 0;
+let x = -1024;
+let y = -1024;
 
 window.addEventListener( "mousemove" , ( event: MouseEvent ) => {
-    x = ( 1024 - Math.min( event.pageX, 1024 ) ) / 1024 * 200 - 100;
-    y = ( 1024 - Math.min( event.pageY, 1024 ) ) / 1024  * 200 - 100;
+    x = ( 1024 - event.pageX ) / 1024 * 200 - 100;
+    y = ( 1024 - event.pageY ) / 1024 * 200 - 100;
 } );
-
 
 stop();
 document.body.innerHTML = "";
@@ -53,7 +52,6 @@ options( {
     canvas: renderer.domElement,
     color: "black",
 } );
-
 
 draw( ( gl: WebGLRenderingContext, now: number ) => {
     particles.updateUniform( "mouse", [ x, y ] );

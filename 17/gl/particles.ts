@@ -1,5 +1,5 @@
 import { random } from "lodash";
-import { AdditiveBlending, BufferAttribute, BufferGeometry, Points, ShaderMaterial, WebGLRenderer } from "three";
+import { AdditiveBlending, BufferAttribute, BufferGeometry, Points, ShaderMaterial, WebGLRenderer, Shader } from "three";
 
 // @ts-ignore
 import fragmentShader from "../shaders/dirt.fragment.glsl";
@@ -47,14 +47,12 @@ export class Particles extends Points {
             size,
             startValue: ( () => {
                 const array: number[] = [];
+                const factor = 200 / size;
 
-                for ( let j = 0, length = size * size; j < length; j++ ) {
-                    array.push(
-                        random( -100, 100, true ),
-                        random( -100, 100, true ),
-                        1,
-                        0,
-                    );
+                for ( let y = 0; y < size; y++ ) {
+                    for ( let x = 0; x < size; x++ ) {
+                        array.push( x * factor - 100, y * factor - 100, 1, 0 );
+                    }
                 }
 
                 return array;
@@ -89,6 +87,7 @@ export class Particles extends Points {
 
             uniforms: {
                 positionTexture: { value: positionPass.getTexture() },
+                velocityTexture: { value: velocityPass.getTexture() },
             },
         } );
 
@@ -122,8 +121,9 @@ export class Particles extends Points {
         this.velocityPass.compute();
         this.positionPass.compute();
 
-        ( this.material as ShaderMaterial ).uniforms.positionTexture.value =
-            this.positionPass.getTexture();
+        const material: ShaderMaterial = this.material as ShaderMaterial;
+        material.uniforms.positionTexture.value = this.positionPass.getTexture();
+        material.uniforms.velocityTexture.value = this.velocityPass.getTexture();
 
         this.latest = now;
     }

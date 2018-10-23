@@ -1,0 +1,23 @@
+{
+    "name": "template",
+    "version": "1.0.0",
+    "private": true,
+    "license": "MIT",
+    "scripts": {
+        "dev": "parcel index.html"
+    },
+    "author": {
+        "name": "Mathias Paumgarten",
+        "email": "mail@mathias-paumgarten.com"
+    },
+    "dependencies": {},
+    "devDependencies": {
+        "@types/noisejs": "0.0.28",
+        "@types/three": "^0.92.17",
+        "canvas-recorder": "^1.6.0",
+        "noisejs": "^2.1.0",
+        "parcel-bundler": "^1.9.7",
+        "three": "^0.95.0",
+        "typescript": "^3.0.1"
+    }
+}

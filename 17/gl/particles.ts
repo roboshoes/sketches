@@ -1,5 +1,12 @@
 import { random } from "lodash";
-import { AdditiveBlending, BufferAttribute, BufferGeometry, Points, ShaderMaterial, WebGLRenderer, Shader } from "three";
+import {
+    AdditiveBlending,
+    BufferAttribute,
+    BufferGeometry,
+    Points,
+    ShaderMaterial,
+    WebGLRenderer,
+} from "three";
 
 // @ts-ignore
 import fragmentShader from "../shaders/dirt.fragment.glsl";
@@ -51,7 +58,12 @@ export class Particles extends Points {
 
                 for ( let y = 0; y < size; y++ ) {
                     for ( let x = 0; x < size; x++ ) {
-                        array.push( x * factor - 100, y * factor - 100, 1, 0 );
+                        array.push(
+                            random( -100, 100, true ),
+                            random( -100, 100, true ),
+                            1,
+                            0,
+                        );
                     }
                 }
 
@@ -88,8 +100,14 @@ export class Particles extends Points {
             uniforms: {
                 positionTexture: { value: positionPass.getTexture() },
                 velocityTexture: { value: velocityPass.getTexture() },
+                fontTexture: { value: options.velocityUniforms.fontTexture },
+            },
+
+            defines: {
+                resolution: "vec2( 1024 )",
             },
         } );
+
 
         const geometry = new BufferGeometry();
 

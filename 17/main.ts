@@ -1,6 +1,7 @@
 import { bootstrap, draw, options, setup, stop } from "canvas-recorder/gl";
 import { AmbientLight, PerspectiveCamera, Scene, Vector3, WebGLRenderer } from "three";
 
+import { Canvas } from "./canvas";
 import { Particles } from "./gl/particles";
 // @ts-ignore
 import positionShader from "./shaders/position.fragment.glsl";
@@ -11,6 +12,7 @@ const ambientLight = new AmbientLight( 0x404040 );
 const camera = new PerspectiveCamera( 90, 1, 1, 10000 );
 const scene = new Scene();
 const renderer = new WebGLRenderer( { alpha: false } );
+const canvas = new Canvas();
 const particles = new Particles( 128, {
     renderer,
 
@@ -22,6 +24,7 @@ const particles = new Particles( 128, {
     velocityShader,
     velocityUniforms: {
         mouse: [ 0, 0 ],
+        fontTexture: canvas.getTexture(),
     },
 } );
 
@@ -34,6 +37,8 @@ camera.lookAt( new Vector3() );
 
 scene.add( particles );
 scene.add( ambientLight );
+
+canvas.write( "hey\noh\nwow" );
 
 let x = -1024;
 let y = -1024;
@@ -61,3 +66,5 @@ draw( ( gl: WebGLRenderingContext, now: number ) => {
 } );
 
 bootstrap();
+
+document.body.appendChild( canvas.getElement() );

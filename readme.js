@@ -5,7 +5,7 @@ const folders = fs
     .filter( name => !isNaN( Number( name ) ) )
     .filter( name => fs.existsSync(`./${ name }/example.png` ) )
     .sort( ( a, b ) => parseInt( a ) - parseInt( b ) )
-    .map( folder => `<img src="./${ folder }/example.png" width="25%" style="float: left" />` );
+    .map( folder => `<img src="./${ folder }/example.png" width="25%" align="left" />` );
 
 fs.writeFileSync( "README.md", `
 # Sketches

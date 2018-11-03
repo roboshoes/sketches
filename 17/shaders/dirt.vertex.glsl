@@ -11,6 +11,8 @@ void main() {
 
     speed = length( particleVelocity );
 
+    float size = floor( fract( reference.x ) * 10.0 ) / 2.0;
+
     gl_Position = projectionMatrix * modelViewMatrix * vec4( particlePosition.xyz, 1.0 );
-    gl_PointSize = 6.0;
+    gl_PointSize = size;
 }

@@ -5,6 +5,7 @@ import {
     BufferGeometry,
     Points,
     ShaderMaterial,
+    Texture,
     WebGLRenderer,
 } from "three";
 
@@ -16,7 +17,7 @@ import { createTexture, ShaderPass } from "./shader-pass";
 
 
 // Incomplete list of possible uniform types.
-export type UniformValue = number | [ number, number ];
+export type UniformValue = number | [ number, number ] | Texture;
 
 export interface ParticlesOptions {
     positionShader: string;
@@ -54,7 +55,6 @@ export class Particles extends Points {
             size,
             startValue: ( () => {
                 const array: number[] = [];
-                const factor = 200 / size;
 
                 for ( let y = 0; y < size; y++ ) {
                     for ( let x = 0; x < size; x++ ) {
@@ -71,8 +71,8 @@ export class Particles extends Points {
             } )(),
             uniforms: {
                 ...options.positionUniforms,
-                delta: 0.016,
                 velocityTexture: createTexture( size, size, 0 ),
+                delta: 0.016,
             },
         } );
 
@@ -91,7 +91,6 @@ export class Particles extends Points {
 
         const material = new ShaderMaterial( {
             transparent: true,
-            blending: AdditiveBlending,
             depthWrite: false,
 
             vertexShader,

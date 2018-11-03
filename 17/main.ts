@@ -50,7 +50,7 @@ stop();
 document.body.innerHTML = "";
 
 options( {
-    record: false,
+    record: true,
     clear: false,
     canvas: renderer.domElement,
     color: "black",
@@ -64,6 +64,8 @@ draw( ( gl: WebGLRenderingContext, now: number ) => {
 } );
 
 bootstrap();
+
+window.stop = stop;
 
 // Debug test image
 //

@@ -50,7 +50,7 @@ stop();
 document.body.innerHTML = "";
 
 options( {
-    record: true,
+    record: false,
     clear: false,
     canvas: renderer.domElement,
     color: "black",

@@ -129,6 +129,8 @@ export class InterpolatedCircle extends Circle {
 
 }
 
+
+// TODO: use from matdesl package.
 function quadOut(t) {
     return -t * (t - 2.0)
-  }
+}

@@ -9,13 +9,14 @@ stop();
 options( {
     record: false,
     clear: true,
+    color: "black",
 } );
 
 draw( ( context: CanvasRenderingContext2D ) => {
 
     context.translate( 512, 512 );
-    context.lineWidth = 2;
-    context.strokeStyle = "black";
+    context.lineWidth = 1;
+    context.strokeStyle = "white";
 
     container.draw( context );
 

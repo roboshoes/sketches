@@ -1,5 +1,6 @@
 import { random } from "lodash";
 import { Vector2 } from "three";
+import { quadInOut } from "eases";
 
 import { Drawable } from "./shared";
 
@@ -110,7 +111,7 @@ export class InterpolatedCircle extends Circle {
             const distance: number = this.lerp(
                 this.first.anchors[ i ].distance,
                 this.last.anchors[ i ].distance,
-                quadOut( this.percent )
+                quadInOut( this.percent )
             );
 
             const leg: number = this.lerp(
@@ -151,13 +152,4 @@ export class Blob extends Circle {
         }
     }
 
-}
-
-
-// TODO: use from matdesl package.
-function quadOut(t: number): number {
-    t /= 0.5;
-    if (t < 1) return 0.5*t*t;
-    t--;
-    return -0.5 * (t*(t-2) - 1);
 }

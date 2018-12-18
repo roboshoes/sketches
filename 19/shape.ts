@@ -125,6 +125,11 @@ export class InterpolatedCircle extends Circle {
         } );
     }
 
+    draw( context: CanvasRenderingContext2D ): void {
+        context.lineWidth = 10 * Math.pow( Math.sin( Math.PI * this.percent ), 3 );
+        super.draw( context );
+    }
+
     private lerp( a: number, b: number, t: number ): number {
         return ( 1 - t ) * a + t * b;
     }

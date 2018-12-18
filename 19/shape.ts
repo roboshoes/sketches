@@ -1,3 +1,4 @@
+import { random } from "lodash";
 import { Vector2 } from "three";
 
 import { Drawable } from "./shared";
@@ -129,8 +130,34 @@ export class InterpolatedCircle extends Circle {
 
 }
 
+export class Square extends Circle {
+    constructor( radius = 200 ) {
+        super( radius );
+
+        for ( let i = 1; i < this.anchors.length; i += 2 ) {
+            this.anchors[ i ].updateDistance( Math.sqrt( 2 ) * radius );
+        }
+
+        this.anchors.forEach( anchor => anchor.updateLegPercent( 0 ) );
+    }
+}
+
+export class Blob extends Circle {
+    constructor( min: number, max: number ) {
+        super( min );
+
+        for ( let i = 0; i < this.anchors.length; i++ ) {
+            this.anchors[ i ].updateDistance( random( min, max, false ) );
+        }
+    }
+
+}
+
 
 // TODO: use from matdesl package.
-function quadOut(t) {
-    return -t * (t - 2.0)
+function quadOut(t: number): number {
+    t /= 0.5;
+    if (t < 1) return 0.5*t*t;
+    t--;
+    return -0.5 * (t*(t-2) - 1);
 }

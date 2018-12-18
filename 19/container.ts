@@ -1,24 +1,23 @@
-import { Circle, InterpolatedCircle } from "./circle";
+import { Circle, InterpolatedCircle, Square, Blob } from "./shape";
 import { Drawable } from "./shared";
 
 export class Container implements Drawable {
 
     readonly circles: InterpolatedCircle[] = [];
-    readonly outer = new Circle( 300 );
+    readonly square = new Square( 500 );
+    readonly blob = new Blob( 200, 400 );
     readonly inner = new Circle( 20 );
 
     constructor() {
 
-        for ( let i = 1; i < this.outer.anchors.length; i += 2 ) {
-            this.outer.anchors[ i ].updateDistance( Math.sqrt( 2 ) * 300 );
-        }
-
-        this.outer.anchors.forEach( anchor => anchor.updateLegPercent( 0 ) );
-
-        const amount = 10;
+        const amount = 15;
 
         for ( let i = 0; i < amount; i++ ) {
-            this.circles.push( new InterpolatedCircle( this.outer, this.inner, i / ( amount - 1 ) ) );
+            this.circles.push( new InterpolatedCircle( this.square, this.blob, i / ( amount - 1 ) ) );
+        }
+
+        for ( let i = 0; i < amount; i++ ) {
+            this.circles.push( new InterpolatedCircle( this.blob, this.inner, i / ( amount - 1 ) ) );
         }
     }
 

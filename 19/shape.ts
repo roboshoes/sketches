@@ -1,8 +1,9 @@
-import { random } from "lodash";
+import { random, times } from "lodash";
 import { Vector2 } from "three";
 import { quadInOut } from "eases";
 
 import { Drawable } from "./shared";
+import { Motion, MotionSequence, IMotion } from "./motion";
 
 const ZERO = new Vector2();
 
@@ -105,7 +106,7 @@ export class InterpolatedCircle extends Circle {
         this.update();
     }
 
-    private update() {
+    update(): void {
         this.anchors.forEach( ( anchor: Anchor, i: number ) => {
 
             const distance: number = this.lerp(
@@ -149,12 +150,22 @@ export class Square extends Circle {
 }
 
 export class Blob extends Circle {
+
+    private motions: IMotion[];
+
     constructor( min: number, max: number ) {
         super( min );
 
+        this.motions = times( this.anchors.length, () => new MotionSequence( random( 2, 5, false ), random( min, max ), random( min, max ) ) );
+
         for ( let i = 0; i < this.anchors.length; i++ ) {
-            this.anchors[ i ].updateDistance( random( min, max, false ) );
+            this.anchors[ i ].updateDistance( this.motions[ i ].value );
         }
+    }
+
+    update( t: number ) {
+        this.motions.forEach( m => m.update( t ) );
+        this.anchors.forEach( ( a: Anchor, i: number ) => a.updateDistance( this.motions[ i ].value ) );
     }
 
 }

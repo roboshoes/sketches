@@ -21,6 +21,11 @@ export class Container implements Drawable {
         }
     }
 
+    update( t: number ): void {
+        this.blob.update( t );
+        this.circles.forEach( c => c.update() );
+    }
+
     draw( context: CanvasRenderingContext2D ): void {
         this.circles.forEach( circle => circle.draw( context ) );
     }

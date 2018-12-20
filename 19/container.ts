@@ -4,9 +4,9 @@ import { Drawable } from "./shared";
 export class Container implements Drawable {
 
     readonly circles: InterpolatedCircle[] = [];
-    readonly square = new Square( 500 );
+    readonly square = new Square( 512 );
     readonly blob = new Blob( 200, 400 );
-    readonly inner = new Circle( 20 );
+    readonly inner = new Circle( 5 );
 
     constructor() {
 

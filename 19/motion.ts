@@ -1,4 +1,4 @@
-import { times, random } from "lodash";
+import { random } from "lodash";
 
 export interface IMotion {
     update( t: number ): void;
@@ -37,16 +37,23 @@ export class MotionSequence implements IMotion {
     get value() { return this.current; }
 
     constructor( private amount: number, from: number, to: number  ) {
-        let current = random( from, to );
-        const first = current;
+        if ( amount === 1 ) {
 
-        for ( let i = 0; i < amount; i++ ) {
-            if ( i === amount - 1 ) {
-                this.motions.push( new HalfMotion( current, first ) );
-            } else {
-                const next = random( from, to );
-                this.motions.push( new HalfMotion( current, next ) );
-                current = next;
+            this.motions.push( new Motion( from, to ) );
+
+        } else {
+
+            let current = random( from, to );
+            const first = current;
+
+            for ( let i = 0; i < amount; i++ ) {
+                if ( i === amount - 1 ) {
+                    this.motions.push( new HalfMotion( current, first ) );
+                } else {
+                    const next = random( from, to );
+                    this.motions.push( new HalfMotion( current, next ) );
+                    current = next;
+                }
             }
         }
 
@@ -54,10 +61,14 @@ export class MotionSequence implements IMotion {
     }
 
     update( t: number ) {
+
+        if ( this.motions.length === 1 ) {
+            this.motions[ 0 ].update( t );
+            this.current = this.motions[ 0 ].value;
+        }
         const slice = 1 / this.amount;
         const index = Math.floor( t / slice );
-        const tt = ( t / slice - Math.floor( t / slice ) ) / slice;
-
+        const tt = ( t / slice - Math.floor( t / slice ) );
 
         this.motions[ index ].update( tt );
         this.current = this.motions[ index ].value;

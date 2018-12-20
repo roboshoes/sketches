@@ -10,6 +10,7 @@ options( {
     record: false,
     clear: true,
     frames: 60 * 6,
+    fps: 60,
     color: "black",
 } );
 

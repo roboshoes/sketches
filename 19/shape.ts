@@ -1,9 +1,9 @@
+import { quadInOut } from "eases";
 import { random, times } from "lodash";
 import { Vector2 } from "three";
-import { quadInOut } from "eases";
 
+import { IMotion, MotionSequence } from "./motion";
 import { Drawable } from "./shared";
-import { Motion, MotionSequence, IMotion } from "./motion";
 
 const ZERO = new Vector2();
 
@@ -127,7 +127,7 @@ export class InterpolatedCircle extends Circle {
     }
 
     draw( context: CanvasRenderingContext2D ): void {
-        context.lineWidth = 10 * Math.pow( Math.sin( Math.PI * this.percent ), 3 );
+        context.lineWidth = 15 * Math.pow( Math.sin( Math.PI * this.percent ), 3 );
         super.draw( context );
     }
 
@@ -156,7 +156,7 @@ export class Blob extends Circle {
     constructor( min: number, max: number ) {
         super( min );
 
-        this.motions = times( this.anchors.length, () => new MotionSequence( random( 2, 5, false ), random( min, max ), random( min, max ) ) );
+        this.motions = times( this.anchors.length, () => new MotionSequence( random( 1, 5, false ), random( min, max ), random( min, max ) ) );
 
         for ( let i = 0; i < this.anchors.length; i++ ) {
             this.anchors[ i ].updateDistance( this.motions[ i ].value );

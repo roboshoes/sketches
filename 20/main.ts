@@ -79,7 +79,12 @@ function getColor( index: number ): string {
     return `rgb( ${ color.join( "," ) } )`;
 }
 
-function renderLine( context: CanvasRenderingContext2D, start: Gate, end: Gate, t1: number, t2: number, options: LineOptions = {} ) {
+function renderLine( context: CanvasRenderingContext2D,
+                     start: Gate,
+                     end: Gate,
+                     t1: number,
+                     t2: number,
+                     options: LineOptions = {} ) {
     const length = ( t2 - t1 ) * SIZE;
     const anchorLength = length / 2;
     const gradient = context.createLinearGradient( 0, 0, SIZE, 0 );
@@ -121,7 +126,7 @@ function renderLine( context: CanvasRenderingContext2D, start: Gate, end: Gate, 
         context.bezierCurveTo(
             SIZE * t1 + anchorLength, start.y,
             SIZE * t1 + anchorLength, end.y,
-            SIZE * t1 + length, end.y
+            SIZE * t1 + length, end.y,
         );
         context.lineTo( SIZE, end.y );
         context.lineTo( SIZE, end.y + end.width );

@@ -1,8 +1,13 @@
-const canvas = document.getElementById( "canvas" ) as HTMLCanvasElement;
-const context = canvas.getContext( "2d" )!;
+import { options, draw, getContext, bootstrap, getCanvas } from "canvas-recorder";
 
-canvas.width = 1024;
-canvas.height = 1024;
+const context = getContext();
+
+options( {
+    size: [ 1024, 1024 ],
+    clear: false,
+    record: false,
+    frames: 60 * 6,
+} );
 
 type vec2 = [ number, number ];
 
@@ -97,6 +102,7 @@ function copyCirlce( from: Circle, to: Circle ): Circle {
 
 function render( t: number ) {
     context.fillStyle = "white";
+    context.globalCompositeOperation = "";
 
     for ( let i = 0; i < from.length; i++ ) {
         copyCirlce( from[ i ], circleT );
@@ -111,26 +117,20 @@ function render( t: number ) {
         lerpCircle( from[ i ], from[ ( i + 1 ) % from.length ], t, circleT );
         renderCircle( circleT );
     }
+
+    context.globalCompositeOperation = "destination-over";
+    context.fillStyle = "white";
+    context.fillRect( 0, 0, 1024, 1024 );
 }
 
 function ease( t: number ): number {
     return ( Math.cos( Math.PI * t ) + 1 ) / 2;
 }
 
-const start = Date.now();
-const duration = 5000;
+draw( ( _1, _2, t: number ) => {
+    getCanvas().width = 1024;
 
-function loop() {
-    canvas.width = canvas.width;
+    render( ease( t ) );
+} );
 
-    const now = Date.now();
-    const delta = ( ( now - start ) / duration );
-
-    render( ease( delta ) );
-
-    if ( start + duration > now ) {
-        requestAnimationFrame( loop );
-    }
-}
-
-loop();
+bootstrap();

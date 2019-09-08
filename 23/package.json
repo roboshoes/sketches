@@ -1,5 +1,10 @@
 {
   "devDependencies": {
+    "canvas-recorder": "^1.7.1",
+    "parcel": "^1.12.3",
     "typescript": "^3.5.2"
+  },
+  "scripts": {
+    "dev": "parcel index.html"
   }
 }

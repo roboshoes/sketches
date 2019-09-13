@@ -1,4 +1,4 @@
-import { DoubleSide, Mesh, PlaneBufferGeometry, ShaderLib, ShaderMaterial, UniformsLib, UniformsUtils } from "three";
+import { Color, DoubleSide, Mesh, PlaneBufferGeometry, ShaderLib, ShaderMaterial, UniformsUtils } from "three";
 
 const projectVertex = `
     #include <common>
@@ -12,68 +12,67 @@ const projectVertex = `
     #include <logdepthbuf_pars_vertex>
     #include <clipping_planes_pars_vertex>
 
-    uniform float time;
+    const float radius = 10.0;
+    const float innerRadius = 5.0;
 
-    const float radius = 5.0;
+    uniform vec3 uColor;
 
     void main() {
-        vColor = color;
+        vColor = uColor;
 
         vec4 transformed = vec4( position, 1.0 );
         vec4 screenPosition = projectionMatrix * modelViewMatrix * transformed;
 
         float toCenter = length( screenPosition.xy );
 
-        transformed.z += smoothstep( 0.0, radius, ( radius - clamp( toCenter, 0.0, radius ) ) ) * 5.0;
+        transformed.z -= smoothstep( 0.0, radius, ( radius - clamp( toCenter, 0.0, radius ) ) ) * 7.0;
 
         gl_Position = projectionMatrix * modelViewMatrix * transformed;
     }
 `;
 
-const start = Date.now();
+const geometry = new PlaneBufferGeometry( 5, 1, 100, 50 );
+const material = new ShaderMaterial( {
+    uniforms: UniformsUtils.merge( [
+        ShaderLib.basic.uniforms,
+        {
+            uColor: { value: new Color( 1, 0, 0 ) }
+        }
+    ] ),
+
+    defines: {
+        USE_COLOR: "1"
+    },
+
+    side: DoubleSide,
+
+    vertexShader: projectVertex,
+    fragmentShader: ShaderLib.basic.fragmentShader,
+} );
 
 export class Ribbon extends Mesh {
+    private start: number ;
+    private y: number;
+    private z: number;
+
     constructor() {
-        const geometry = new PlaneBufferGeometry( 10, 5, 100, 50 );
-        const material = new ShaderMaterial( {
-            uniforms: UniformsUtils.merge( [
-                UniformsLib.common,
-                UniformsLib.specularmap,
-                UniformsLib.envmap,
-                UniformsLib.aomap,
-                UniformsLib.lightmap,
-                UniformsLib.fog,
-                {
-                    time: { value: ( Date.now() - start ) / 1000 },
-                }
-            ] ),
+        const m = material.clone();
 
-            defines: {
-                USE_COLOR: "1"
-            },
+        m.uniforms.uColor.value = new Color( Math.random() * 0.7 + 0.3, 0, 0 );
 
-            side: DoubleSide,
+        super( geometry, m );
 
-            vertexShader: ShaderLib.basic.vertexShader,
-            fragmentShader: ShaderLib.basic.fragmentShader,
-        } );
+        this.start = Math.random();
+        this.y = 7 - Math.random() * 14;
+        this.z = Math.random() * 5;
 
-        material.defaultAttributeValues = {
-            color: [ 1, 0, 0 ],
-        }
-
-        material.onBeforeCompile = ( shader ) => {
-            shader.vertexShader = projectVertex;
-        };
-
-        super( geometry, material );
+        this.scale.set( Math.random() + 0.5, Math.random(), 1 );
     }
 
-    update() {
-        const delta: number = ( ( Date.now() - start ) / 1000 ) % 6;
+    update( t: number ) {
+        const p = ( 1 - t + this.start ) % 1;
+        const x = 15 + p * -30;
 
-        this.position.set( Math.sin( delta / 10.0 * Math.PI * 2 - Math.PI ) * 10, 0, 0 );
-
-        ( this.material as ShaderMaterial ).uniforms.time.value = delta;
+        this.position.set( x, this.y, this.z );
     }
 }

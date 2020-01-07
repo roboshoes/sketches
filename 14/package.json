@@ -19,8 +19,8 @@
     "eases": "^1.0.8",
     "fast-simplex-noise": "^3.2.0",
     "less": "^3.0.4",
-    "lodash": "^4.17.10",
-    "parcel-bundler": "^1.8.1",
+    "lodash": "^4.17.13",
+    "parcel-bundler": "^1.10.0",
     "typescript": "^2.8.3"
   }
 }

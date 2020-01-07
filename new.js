@@ -5,7 +5,7 @@ const nextHighest = fs
     .filter( name => !isNaN( Number( name ) ) )
     .reduce( ( highest, current ) => Math.max( highest, current ), 0 ) + 1;
 
-const name = process.argv[ 2 ] || nextHighest.toString();
+const name = process.argv[ 2 ] || `0${nextHighest}`.slice( -2 );
 
 if ( ! fs.existsSync( name ) ) {
 

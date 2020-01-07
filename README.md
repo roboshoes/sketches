@@ -4,15 +4,15 @@
 A collection of different sketches I have worked on over time. This list is not exhaustive,
 but I didn't want a bunch of seperate repos.
 
-<img src="./1/example.png" width="25%" align="left" />
-<img src="./2/example.png" width="25%" align="left" />
-<img src="./3/example.png" width="25%" align="left" />
-<img src="./4/example.png" width="25%" align="left" />
-<img src="./5/example.png" width="25%" align="left" />
-<img src="./6/example.png" width="25%" align="left" />
-<img src="./7/example.png" width="25%" align="left" />
-<img src="./8/example.png" width="25%" align="left" />
-<img src="./9/example.png" width="25%" align="left" />
+<img src="./01/example.png" width="25%" align="left" />
+<img src="./02/example.png" width="25%" align="left" />
+<img src="./03/example.png" width="25%" align="left" />
+<img src="./04/example.png" width="25%" align="left" />
+<img src="./05/example.png" width="25%" align="left" />
+<img src="./06/example.png" width="25%" align="left" />
+<img src="./07/example.png" width="25%" align="left" />
+<img src="./08/example.png" width="25%" align="left" />
+<img src="./09/example.png" width="25%" align="left" />
 <img src="./10/example.png" width="25%" align="left" />
 <img src="./12/example.png" width="25%" align="left" />
 <img src="./15/example.png" width="25%" align="left" />

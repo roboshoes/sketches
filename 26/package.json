@@ -1,0 +1,21 @@
+{
+    "name": "template",
+    "version": "1.0.0",
+    "private": true,
+    "license": "MIT",
+    "scripts": {
+        "dev": "parcel index.html"
+    },
+    "author": {
+        "name": "Mathias Paumgarten",
+        "email": "mail@mathias-paumgarten.com"
+    },
+    "dependencies": {},
+    "devDependencies": {
+        "@types/three": "^0.103.2",
+        "canvas-recorder": "^1.8.0",
+        "parcel-bundler": "^1.12.4",
+        "three": "^0.111.0",
+        "typescript": "^3.7.5"
+    }
+}

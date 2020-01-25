@@ -12,8 +12,18 @@ if ( ! fs.existsSync( name ) ) {
     console.log( "-> Generating source" );
     exec( `cp -r _template/ ${ name }/`, () => {
 
+        const packages = [
+            "@roboshoes/eslint-config",
+            "@typescript-eslint/eslint-plugin",
+            "@typescript-eslint/eslint-plugin-tslint",
+            "eslint",
+            "parcel-bundler",
+            "tslint",
+            "typescript",
+        ];
+
         console.log( "-> Installing packages" );
-        exec( "npm install --save-dev parcel-bundler typescript", { cwd: name }, () => {
+        exec( "npm install --save-dev " + packages.join( " " ), { cwd: name }, () => {
 
             console.log( `\nFolder: ${ name }` );
         } );

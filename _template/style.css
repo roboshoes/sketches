@@ -4,3 +4,16 @@ html, body {
     width: 100%;
     height: 100%;
 }
+
+body {
+    align-items: center;
+    background-color: rgb(216, 216, 216);
+    display: flex;
+    justify-content: center;
+}
+
+canvas {
+    box-shadow: 0 0 10px 1px rgba( 0, 0, 0, 0.1 );
+    height: 512px;
+    width: 512px;
+}

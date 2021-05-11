@@ -15,7 +15,7 @@
         "canvas-recorder": "^1.0.4",
         "eases": "^1.0.8",
         "less": "^3.0.4",
-        "lodash": "^4.17.15",
+        "lodash": "^4.17.21",
         "parcel-bundler": "^1.10.0",
         "three": "^0.92.0",
         "tslint": "^5.10.0",
